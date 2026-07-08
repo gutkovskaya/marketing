@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E">
+<title>Каталог отчётов · защищено</title>
+<style>
+  :root{color-scheme:light dark}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:#f4f5f7;color:#1a1a1a}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#e8e8e8}}
+  .card{width:min(92vw,380px);padding:32px 28px;border-radius:16px;background:#fff;
+        box-shadow:0 10px 40px rgba(0,0,0,.12);text-align:center}
+  @media (prefers-color-scheme:dark){.card{background:#181b21;box-shadow:0 10px 40px rgba(0,0,0,.5)}}
+  .lock{font-size:34px;margin-bottom:6px}
+  h1{font-size:18px;margin:0 0 4px}
+  p.sub{font-size:13px;opacity:.65;margin:0 0 20px}
+  input{width:100%;padding:12px 14px;font-size:15px;border-radius:10px;border:1px solid #d0d3d9;
+        background:#fbfbfc;color:inherit;outline:none}
+  @media (prefers-color-scheme:dark){input{background:#0f1115;border-color:#2a2f3a}}
+  input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.2)}
+  button{width:100%;margin-top:12px;padding:12px 14px;font-size:15px;font-weight:600;border:0;
+         border-radius:10px;background:#2563eb;color:#fff;cursor:pointer}
+  button:hover{background:#1d4ed8}
+  .err{color:#dc2626;font-size:13px;height:18px;margin-top:10px}
+</style>
+</head>
+<body>
+  <form class="card" id="f" autocomplete="off">
+    <div class="lock">🔒</div>
+    <h1>Каталог отчётов</h1>
+    <p class="sub">Маркетинг · доступ по паролю</p>
+    <input type="password" id="pw" placeholder="Пароль" autofocus>
+    <button type="submit">Открыть</button>
+    <div class="err" id="e"></div>
+  </form>
+<script>
+const DATA={"salt": "NESKW8rmcr7PkUFR1N7WFw==", "iv": "OFYDjzL4ZNKGKaKX", "ct": "nm+xj1fkFBo5UnnP0uuC6lhbsl6Ot/AwwtuLPXddCn+ZVfRx+kiK5b9JjF0iRymBRkuu98tZJvZ5eAplUaPZap/6SS59NdMn92h+lEsZFj+Fe4YXh17pzF+GPlQZAykFtVTwbn1i/LAXtIXRLBOI2rcvOSzoumJsDaepHGmNyvXddBzjoQGg+YfFAQ7UF4YrmbEWzU5rvxBapOz8qXjA18I8/AU3Z4IJOTQNYQRyd1Kmws+MhNa1J3BnH75laOAw45fbSu+hLd/snyO4OzhgvprqC0gelrhouG8DCsMo90i636KAF2MYhUcJIDOTULp+QllzawCerhHktN9P2tR0OIo3zjzqOnle8+lXc2MBRy6N1jf6Joi7AL0Tnf4XVYnM24ZSdU4wFKs+s1EdeObmpvf4Rng2iRVRgVBBmzBWecAhFJrjF+ir/oZnK2yMzlnBeCK9eOB6A6xCzdI+UqCNvd4MeG+vyalIK95bpSmXBfozWE94xvhJo56Lyp31ttuayKhe6L0HaU3EyIeU6WAhjPiI6HjG6QiJA/D/cb2efJ5DLvdDFCGAaMFxMoL4eOF48JugTbyHl5WQ9YZapjCv9hJgkcBI3DQh/meBGcHsuFcUcdADaKEszLzowy7aAzKM+5C1VlQBFRWdrC2sZbnChfThH127WIl4yZldEJadErYlm5jBNUhgwP9mLtr1gNHcWreaH0ChobJAp5q1pRfd7CM9gpPpJK6LUkrlkR2b/59AZSCTLLsjAoRQZr5DCUA3JYwaHOuGK0V0ZLUVIa/1AroE5oM/4pC5i2Bz5q5CYFgOnnBDAZZ8oIsSDv3F9IRlZIG8OdpKhDyS4RM3vfJ9fSa7IchjO6pXnR0S4uKxuCtlz/qNCk3Cm+l9tim9jEHvhz4KhfJyOIG5jLSbam0sHyiXAyrhEWNyscO16R4La/dG5qq0GGtkiTxHpTu43TqRKR5+459NuE19zrwkHM0/8Ij14qQq9YH4Lks1toZOzLtjRTXOepC7eGl2Vik+eSm6pGPyf6qU11EXIqsa7cT34rBO3FJ0LwSM99XpP8WHNZMSLOlZYMJ6u0Ydtjeu+Gg5Q8NMsKURGBA2g0F9Hhr94qu2qK8VgRyPJD8y4Ib2a1x+GSRQUdPLdMKu0XPJNu5F8Ewu3orxfUwq5fL0qtsznQejOO2x8TjmkZnic3afJgagjHavhvaLamWWSb4/iEaEfaGOpM5ew5LEFJksfC+g2S6ypbOihDR6nOUkZ1s3kBdbZMuaywxlOSuvYk0YNo775JxW42ZX1j8x5cEG3ZybZ8sKfOh3Wd88XOKWxGmierjsp4nBxgkIayNbPDezEDKI2TwX1eS5mbaK8XHm8Hhj3zajBnxgq2rfWe0WpbEPZhSHwh7a4n/84vQxCrdJLOwgS5/n1jdBbQtkbRLRFFVyAeyoEccYK+QVxEOpJbD9fvTsQgVs/kZSTkX65HNy4EsD/5UDt0slPz1aDd9jtZdz4Yz64CJeNZs0AW0R+6WUDcbmydG2+v5F3/DgLlrm74Hd0zknWt548tVnzfXZggKeE+4Uqcel+yjX8o4/zVVh6tFb1e/UjqoR/iP9N71bOMAFHx3dCcOCwXqT7EuBgGAYZgqvfQelamrClVEaUWAHR9dUrCycRZmsjzCp50gYXDhrHUOeq89dgQNEUlftcYOeeF5e2xSpiUuxvtA030tp34l5ePTkUo7XCBbTyqopY+ZJY0x0/3D5fpreaoYJtO8j2gZVu9oDT9SSgbRA+emgyaAycvozzICpGqnCkWrNq60lSwdvAGyovPQ43xUQpYeD/HrZNXbr3NcEIFBELj0m5mUKcfW5dBOVJaeQKOCuq7S8zs5GmabhzaFiRUITEpppHGehHIRz4Pb4rq7PRw9n3pzgWRQX06dQ4miN/lBXQT3yJYv6TPTAJ3TrqnOge7GYajjZGZKvfydzmJnqM+nZ2LGIydtsUpnNy8hJXL4W9bfZpUFNDkDm+kORcd8cjDHWy/9yR/+4F1o2FvxevvCU2lGRdfdraF3PGerw/4Mx27s6t6jorlFnxJLT0Q+LGjloC5RclEOpxrWraDrAjreE4wZ2PalOVG4hEK3bT5yG3tJm1nI+bbVKFnGXRb9YfBLKpNGZasz8BzNU1kZ7nJLM44lT4yx757EejmfhMfjJWpFCot2EisFpmYRyCay/+uGqux0DKDOyaO36+zFFdP41qT9bFhyP7UmswrDGlSSrCD/9Gb6VnlHIGEpUOGIeqGlF92Va95AeOgfmVnzXT7IsKFcbXcY9UGvokxw4Vgc3e6LDBM9l1EGAgEhf5YQcyqt01FxQ9qLd1e4gue/qUTAJJaIngQ7muw8042RLvXH2nnBVSjj+vYNrZ4ls1fb/CrHc8twQNm1pah330a8uoSDVmB8gfVSZmq+GS9udLuQU6tM6PFyeVuXQoRTOJVrQwESOqPSNw/RmwPh016+fb7/ELHhpjsUA2/ej5e1KXw0zEf/3wDRCBgV7GS8wz099hNBuaNwX0oFcQEhOjGKzla+AvK8p9j/WKlfdVmMIYhqgdDWybSGEiZ/zN323zWGE95n/XjZUYbm1W35gYyFkOhdxl6TxoycE7QXF1HU0Rab9VybhKrG9EEdaJtau4en7Qo/61fQ4DWaKOqPB8KFoZ6fnM0a/ezDWd2iCZ4K6lJ0GOWrlo4ZwJ1wBo+mJ1NiX8ya/hLCji9mpThapucVuGINC0GWepM59x0DODzEAD1FDvIGCyo1xBcUAcBSUmnyVi3Jzlez9EP1TgsSjAWErsMvxijMrlA1Jf6uL4JOvuGwSMlmtxj1Ycu9wU6uEKQPqcaSyLBb71cW609B1qYOYyjfL9OOmivs+SDraTBT4QSqDMjJm7aoIv8pKlG3+5anjC+lGCc4XHc7ZS26w775DXfWDvp6e5YP63OPtNZ4j751CKeiOOKR3w0YBtX+ourbH75cnLGlFxlsaX/u9Pk3L8/E3OUQJIUeW6K/Ku5c18FubKHfgiptXS1T22smgFJAUwEkzhkfcndnJiCBjwE9HllWeeaQJ1UCicGAcAd+MpbdSWj1lMkMArTYQOZ/dCXQhi2QL1I0LoHuBwYvBikIyyGlZoTSBMQlmjVVmdRSLaQMy5hlubhMdhDL70JzrvfNUi5insJeD3n/Awd/gW3X/ALNBV/mO0f/p4MFOvYR7LiKgwIA6KjxU5YZ1us3RDgiDnq2LlN2/eM943/pCGMLD+Kh6pqCguRIZ4ME9gVjK2ypl7FqRmbJ+/3OjbAs4qpj6E1OsnXcPXMyAbKI9twlwOYIUBir5HuNGVh2DGIF6sHbqpQ2LyNAL0we9vzrNgLRhm+LMGkU=", "iter": 200000};
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decrypt(pw){
+  const enc=new TextEncoder();
+  const km=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey(
+    {name:'PBKDF2',salt:b64(DATA.salt),iterations:DATA.iter,hash:'SHA-256'},
+    km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const buf=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(DATA.iv)},key,b64(DATA.ct));
+  return new TextDecoder().decode(buf);
+}
+document.getElementById('f').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const pw=document.getElementById('pw').value;
+  try{const html=await decrypt(pw);localStorage.setItem('catalog_pw',pw);document.open();document.write(html);document.close();}
+  catch(_){document.getElementById('e').textContent='Неверный пароль';}
+});
+// авто-вход, если пароль уже вводили (localStorage — общий для всех вкладок)
+(async()=>{
+  const pw=localStorage.getItem('catalog_pw');
+  if(!pw)return;
+  try{const html=await decrypt(pw);document.open();document.write(html);document.close();}catch(_){}
+})();
+</script>
+</body>
+</html>
